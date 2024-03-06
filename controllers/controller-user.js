@@ -21,3 +21,14 @@ exports.createNewUser = catchAsync(async (req, res) => {
     },
   });
 });
+
+// exports.getUser = catchAsync(async (req, res) => {
+//   const user = await User.findById(req.)
+// })
+
+exports.getCurrentUserDetails = (req, res) => {
+  res.status(200).json({
+    status: "success",
+    data: { user: req.user },
+  });
+};

@@ -10,6 +10,9 @@ const userSchema = Schema({
     type: String,
     required: [true, "A user must have an Aadhar Id"],
     unique: [true, "Aadhar already in use!"],
+    minLength: 12,
+    maxLength: 12,
+    match: /^\d+$/,
   },
   email: {
     type: String,
@@ -19,6 +22,8 @@ const userSchema = Schema({
   password: {
     type: String,
     required: [true, "A user must have a password"],
+    minLength: 6,
+    maxLength: 14,
   },
   confirmPassword: {
     type: String,
@@ -30,7 +35,19 @@ const userSchema = Schema({
       message: "The two passwords do not match!",
     },
   },
+  role: {
+    type: String,
+    default: "user",
+    enums: ["user", "officer", "admin"],
+  },
 });
+
+userSchema.methods.checkPassword = async function (candidatePassword) {
+  const isCorrect = await bcrypt.compare(candidatePassword, this.password);
+  return isCorrect;
+};
+
+userSchema.index({ email: 1 });
 
 userSchema.pre("save", function (next) {
   if (!this.isModified("password")) return next();
