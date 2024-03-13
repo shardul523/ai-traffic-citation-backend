@@ -16,6 +16,7 @@ const vehicleSchema = Schema({
     ref: "User",
     required: [true, "A vehicle must have an owner"],
   },
+  model: String,
 });
 
 module.exports = model("Vehicle", vehicleSchema);
