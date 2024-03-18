@@ -18,6 +18,7 @@ const challanSchema = Schema(
     violations: {
       type: [String],
     },
+    violationsImages: [String],
   },
   { timestamps: true }
 );

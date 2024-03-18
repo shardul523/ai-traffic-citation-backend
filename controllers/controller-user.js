@@ -8,6 +8,7 @@ exports.createNewUser = catchAsync(async (req, res) => {
     "password",
     "aadhaar",
     "confirmPassword",
+    "role",
   ];
   const userDetails = filterObj(req.body, allowedFields);
 

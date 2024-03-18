@@ -14,7 +14,6 @@ const vehicleSchema = Schema({
   owner: {
     type: Schema.ObjectId,
     ref: "User",
-    required: [true, "A vehicle must have an owner"],
   },
 });
 

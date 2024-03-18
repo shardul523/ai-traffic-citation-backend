@@ -75,3 +75,10 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   next();
 });
+
+exports.isAuthorized =
+  (...authorizedRoles) =>
+  (req, res, next) => {
+    if (authorizedRoles.find(req.user.role)) next();
+    else next(new AppError("You are not authorized to access this route", 402));
+  };

@@ -3,10 +3,16 @@ const controllers = require("../controllers");
 
 const router = Router();
 
-// router.route("/").post(controllers.user.createNewUser);
-
 router
   .route("/me")
   .get(controllers.auth.protect, controllers.user.getCurrentUserDetails);
+
+router
+  .route("/")
+  .post(
+    controllers.auth.protect,
+    controllers.auth.isAuthorized("admin", "officer"),
+    controllers.user.createNewUser
+  );
 
 module.exports = router;
