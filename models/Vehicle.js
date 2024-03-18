@@ -15,6 +15,7 @@ const vehicleSchema = Schema({
     type: Schema.ObjectId,
     ref: "User",
   },
+  model: String,
 });
 
 module.exports = model("Vehicle", vehicleSchema);
